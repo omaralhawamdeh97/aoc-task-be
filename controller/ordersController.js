@@ -2,16 +2,13 @@ const { Cart, Order, Item } = require("../db/models");
 
 exports.checkout = async (req, res, next) => {
   const newOrder = await Order.create({ customerId: req.user.id });
-
+  console.log(newOrder, "new");
   const cart = req.body.map((item) => ({
     ...item,
     orderId: newOrder.id,
     itemId: item.id,
   }));
-  console.log(
-    "🚀 ~ file: ordersController.js ~ line 9 ~ cart ~ newOrder",
-    newOrder.toJSON()
-  );
+
   await Cart.bulkCreate(cart);
 
   const finalOrder = {

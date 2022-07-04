@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define("Item", {
     name: {
       type: DataTypes.STRING,
-      allowNull: false, //requred
+      allowNull: false,
     },
 
     slug: {
@@ -14,10 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     description: { type: DataTypes.STRING },
     price: {
       type: DataTypes.INTEGER,
-      defaultValue: 5,
       validate: {
-        min: 3,
-        max: 20,
+        min: 1,
       },
     },
     img: { type: DataTypes.STRING },

@@ -37,8 +37,8 @@ exports.updateItem = async (req, res, next) => {
     if (req.file) {
       req.body.img = `http://${req.get("host")}/${req.file.path}`;
     }
-    await foundItem.update(req.body);
-    res.status(201).json(req.item);
+    const updatedItem = await foundItem.update(req.body);
+    res.status(201).json(updatedItem);
   } catch (error) {
     next(error);
   }
@@ -50,8 +50,8 @@ exports.createItem = async (req, res, next) => {
       req.body.img = `http://${req.get("host")}/${req.file.path}`;
     }
     req.body.customerId = req.user.id;
-    await Item.create(req.body);
-    res.status(200).json(req.item);
+    const newBook = await Item.create(req.body);
+    res.status(200).json(newBook);
   } catch (error) {
     next(error);
   }
